@@ -40,15 +40,11 @@ class TestRelevanceScorer:
         assert isinstance(score, float)
         assert score < 0.5  # Should be low score
 
-    @pytest.mark.xfail(
-        strict=True,
-        reason="issue #64: relevance scorer 'partial overlap' fixture actually has full overlap",
-    )
     def test_query_with_partial_overlap(self, scorer):
         """Test query with partial overlap returns score between 0 and 1."""
         query = "Python Django web framework"
         chunks = [
-            {"text": "Django is a Python web framework for rapid development"},
+            {"text": "Django is a Python library for rapid development"},
         ]
 
         score = scorer.score(query, chunks)
